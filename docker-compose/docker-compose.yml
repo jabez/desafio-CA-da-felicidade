@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  desafio.ca.crud.api:
+    image: desafiocacrudapi
+    build:
+      context: ../src/
+      dockerfile: Desafio.Ca.Crud.Api/Dockerfile
+    ports:
+      - 8080:80
