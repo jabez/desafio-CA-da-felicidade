@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Desafio.Ca.Crud.Domain\Desafio.Ca.Crud.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Categorias\" />
+  </ItemGroup>
+
 </Project>
