@@ -31,7 +31,6 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SwaggerDefaultValues>();
 });
 
-// IoC
 builder.Services.AddDbContextFactory<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
 var app = builder.Build();
 
