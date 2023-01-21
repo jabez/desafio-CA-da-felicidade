@@ -9,7 +9,7 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
         public void Configure(EntityTypeBuilder<Autor> builder)
         {
             builder
-                .ToTable("Livro");
+                .ToTable("Autor");
 
             builder
                 .HasKey(c => c.Id);

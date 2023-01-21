@@ -31,8 +31,15 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SwaggerDefaultValues>();
 });
 
-builder.Services.AddDbContextFactory<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
+//builder.Services.AddDbContextFactory<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
+//builder.Services.AddDbContext<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
+builder.Services.AddDbContext<BibliotecaContext>();
+
 var app = builder.Build();
+using (var serviceScope = app.Services.CreateScope())
+{
+    serviceScope.ServiceProvider.GetService<BibliotecaContext>().Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {

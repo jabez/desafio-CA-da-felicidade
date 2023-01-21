@@ -41,13 +41,14 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
                 .IsRequired();
 
             builder.Property(x => x.Valor)
-                .IsRequired();
+                .IsRequired().HasPrecision(14,2);
 
             builder.Property(x => x.Ativo)
                 .IsRequired();
 
             builder.HasMany(x => x.Autores)
-                .WithMany();
+                .WithMany(x => x.Livros)
+                .UsingEntity(j => j.ToTable("LivroAutor")); ;
         }
     }
 }

@@ -10,7 +10,8 @@ WORKDIR /src
 COPY ["Desafio.Ca.Crud.Api/Desafio.Ca.Crud.Api.csproj", "Desafio.Ca.Crud.Api/"]
 COPY ["Desafio.Ca.Crud.Application/Desafio.Ca.Crud.Application.csproj", "Desafio.Ca.Crud.Application/"]
 COPY ["Desafio.Ca.Crud.Domain/Desafio.Ca.Crud.Domain.csproj", "Desafio.Ca.Crud.Domain/"]
-COPY ["Desafio.Ca.Crud.Infra/Desafio.Ca.Crud.Infra.csproj", "Desafio.Ca.Crud.Infra/"]
+COPY ["Desafio.Ca.Crud.Infra.CrossCutting/Desafio.Ca.Crud.Infra.CrossCutting.csproj", "Desafio.Ca.Crud.Infra.CrossCutting/"]
+COPY ["Desafio.Ca.Crud.Infra.DataBase/Desafio.Ca.Crud.Infra.DataBase.csproj", "Desafio.Ca.Crud.Infra.DataBase/"]
 RUN dotnet restore "Desafio.Ca.Crud.Api/Desafio.Ca.Crud.Api.csproj"
 COPY . .
 WORKDIR "/src/Desafio.Ca.Crud.Api"

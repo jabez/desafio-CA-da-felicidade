@@ -6,10 +6,12 @@ namespace Desafio.Ca.Crud.Infra.DataBase
 {
     public class BibliotecaContext : DbContext
     {
-        public BibliotecaContext(DbContextOptions options) : base(options)
+        public BibliotecaContext()
         {
 
         }
+        public BibliotecaContext(DbContextOptions<BibliotecaContext> options)
+        : base(options) { }
 
         public DbSet<Livro> Livros {  get; set; }
         public DbSet<Autor> Autores { get; set; }
@@ -18,6 +20,11 @@ namespace Desafio.Ca.Crud.Infra.DataBase
         {
             new LivroConfiguration().Configure(modelBuilder.Entity<Livro>());
             new AutorConfiguration().Configure(modelBuilder.Entity<Autor>());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=db;Database=desafio;User Id =sa;Password=Pass@word; MultipleActiveResultSets=true;Persist Security Info=False;Encrypt=False");
         }
 
     }
