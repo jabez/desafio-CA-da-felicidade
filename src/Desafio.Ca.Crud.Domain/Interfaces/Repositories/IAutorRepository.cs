@@ -4,6 +4,10 @@ namespace Desafio.Ca.Crud.Domain.Interfaces.Repositories
 {
     public interface IAutorRepository
     {
-        Task<Autor> AdicionarAutorAsync(Autor autor);
+        Task<Autor> AdicionarAsync(Autor autor);
+        Task<List<Autor>> ObterTodosAsync();
+        Task RemoverAsync(Autor autor);
+        Task<Autor> AtualizarAsync(Autor autor);
+        Task<Autor> PatchAsync(Autor autor);
     }
 }
