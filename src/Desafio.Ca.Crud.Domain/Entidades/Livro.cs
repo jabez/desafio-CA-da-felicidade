@@ -1,4 +1,4 @@
-﻿namespace Desafio.Ca.Crud.Domain
+﻿namespace Desafio.Ca.Crud.Domain.Entidades
 {
     public class Livro
     {

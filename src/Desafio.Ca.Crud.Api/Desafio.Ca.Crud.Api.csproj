@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
@@ -26,11 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Desafio.Ca.Crud.Application\Desafio.Ca.Crud.Application.csproj" />
+    <ProjectReference Include="..\Desafio.Ca.Crud.Infra.CrossCutting\Desafio.Ca.Crud.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\Desafio.Ca.Crud.Infra.DataBase\Desafio.Ca.Crud.Infra.DataBase.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

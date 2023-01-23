@@ -1,4 +1,4 @@
-﻿using Desafio.Ca.Crud.Domain;
+﻿using Desafio.Ca.Crud.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

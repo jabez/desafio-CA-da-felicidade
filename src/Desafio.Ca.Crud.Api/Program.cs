@@ -1,5 +1,8 @@
 using Desafio.Ca.Crud.Api.Configuracoes;
+using Desafio.Ca.Crud.Application.Handlers.V1.Autores.Adicionar;
+using Desafio.Ca.Crud.Infra.CrossCutting;
 using Desafio.Ca.Crud.Infra.DataBase;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +34,9 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SwaggerDefaultValues>();
 });
 
-//builder.Services.AddDbContextFactory<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
-//builder.Services.AddDbContext<BibliotecaContext>(options => options.UseInMemoryDatabase($"bibliotecaDb"));
 builder.Services.AddDbContext<BibliotecaContext>();
+builder.Services.AddMediatR(typeof(AdicionarAutorHandler));
+builder.Services.AddDependeciesInjections();
 
 var app = builder.Build();
 using (var serviceScope = app.Services.CreateScope())
@@ -41,19 +44,16 @@ using (var serviceScope = app.Services.CreateScope())
     serviceScope.ServiceProvider.GetService<BibliotecaContext>().Database.Migrate();
 }
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    foreach (var description in
+        app.Services.GetRequiredService<IApiVersionDescriptionProvider>().ApiVersionDescriptions)
     {
-        foreach (var description in
-            app.Services.GetRequiredService<IApiVersionDescriptionProvider>().ApiVersionDescriptions)
-        {
-            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                description.GroupName.ToUpperInvariant());
-        }
-    });
-}
+        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+        description.GroupName.ToUpperInvariant());
+    }
+});
 
 app.UseHttpsRedirection();
 

@@ -1,4 +1,4 @@
-﻿using Desafio.Ca.Crud.Domain;
+﻿using Desafio.Ca.Crud.Domain.Entidades;
 using Desafio.Ca.Crud.Infra.DataBase.Configurations;
 using Microsoft.EntityFrameworkCore;
 
