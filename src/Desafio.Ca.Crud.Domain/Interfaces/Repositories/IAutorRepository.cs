@@ -9,5 +9,6 @@ namespace Desafio.Ca.Crud.Domain.Interfaces.Repositories
         Task RemoverAsync(Autor autor);
         Task<Autor> AtualizarAsync(Autor autor);
         Task<Autor> PatchAsync(Autor autor);
+        Task<Autor> Obter(Guid id);
     }
 }

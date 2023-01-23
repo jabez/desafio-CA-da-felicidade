@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddDbContext<BibliotecaContext>();
-builder.Services.AddMediatR(typeof(AdicionarAutorHandler));
+builder.Services.AddMediatR(typeof(AdicionaAutorHandler));
 builder.Services.AddDependeciesInjections();
 
 var app = builder.Build();

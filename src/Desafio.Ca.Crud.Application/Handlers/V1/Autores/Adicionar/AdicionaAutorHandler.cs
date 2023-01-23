@@ -4,17 +4,17 @@ using MediatR;
 
 namespace Desafio.Ca.Crud.Application.Handlers.V1.Autores.Adicionar
 {
-    public class AdicionarAutorHandler : IRequestHandler<AdicionarAutorRequest, AdicionarAutorResponse>
+    public class AdicionaAutorHandler : IRequestHandler<AdicionaAutorRequest, AdicionaAutorResponse>
     {
         private readonly IAutorRepository _autorRepository;
-        public AdicionarAutorHandler(IAutorRepository autorRepository) => _autorRepository = autorRepository;
+        public AdicionaAutorHandler(IAutorRepository autorRepository) => _autorRepository = autorRepository;
         
-        public async Task<AdicionarAutorResponse> Handle(AdicionarAutorRequest request, CancellationToken cancellationToken)
+        public async Task<AdicionaAutorResponse> Handle(AdicionaAutorRequest request, CancellationToken cancellationToken)
         {
             var autor = new Autor(nome: request.Nome);
-            await _autorRepository.AdicionarAutorAsync(autor);
+            await _autorRepository.AdicionarAsync(autor);
 
-            return new AdicionarAutorResponse
+            return new AdicionaAutorResponse
             {
                 Id = autor.Id.ToString(),
                 Nome = autor.Nome,

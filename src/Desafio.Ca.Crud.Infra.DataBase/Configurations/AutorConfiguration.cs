@@ -23,6 +23,9 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
 
             builder.Property(x => x.Ativo)
                 .IsRequired();
+
+            builder.Property(x => x.DataAtualizacao)
+                .IsRequired();
         }
     }
 }

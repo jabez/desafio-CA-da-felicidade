@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 {
     [DbContext(typeof(BibliotecaContext))]
-    [Migration("20230121194535_InitialModel")]
+    [Migration("20230123135847_InitialModel")]
     partial class InitialModel
     {
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
                     b.ToTable("LivroAutor", (string)null);
                 });
 
-            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Autor", b =>
+            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Entidades.Autor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,6 +48,9 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("DataAtualizacao")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -59,7 +62,7 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
                     b.ToTable("Autor", (string)null);
                 });
 
-            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Livro", b =>
+            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Entidades.Livro", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,13 +110,13 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 
             modelBuilder.Entity("AutorLivro", b =>
                 {
-                    b.HasOne("Desafio.Ca.Crud.Domain.Autor", null)
+                    b.HasOne("Desafio.Ca.Crud.Domain.Entidades.Autor", null)
                         .WithMany()
                         .HasForeignKey("AutoresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Desafio.Ca.Crud.Domain.Livro", null)
+                    b.HasOne("Desafio.Ca.Crud.Domain.Entidades.Livro", null)
                         .WithMany()
                         .HasForeignKey("LivrosId")
                         .OnDelete(DeleteBehavior.Cascade)
