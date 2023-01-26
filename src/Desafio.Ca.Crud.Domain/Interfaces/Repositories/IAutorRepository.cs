@@ -10,5 +10,6 @@ namespace Desafio.Ca.Crud.Domain.Interfaces.Repositories
         Task<Autor> AtualizarAsync(Autor autor);
         Task<Autor> PatchAsync(Autor autor);
         Task<Autor> Obter(Guid id);
+        Task<List<Autor>> ObterTodosPaginadoAsync(int pageSize, int pageNumber);
     }
 }

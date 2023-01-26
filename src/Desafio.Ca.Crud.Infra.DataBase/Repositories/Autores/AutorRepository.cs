@@ -22,6 +22,16 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Autores
         {
             return await _bibliotecaContext.Autores?.AsNoTracking().ToListAsync();
         }
+
+        public async Task<List<Autor>> ObterTodosPaginadoAsync(int pageSize, int pageNumber)
+        {
+            return await _bibliotecaContext.Autores?
+                         .AsNoTracking()
+                         .Skip((pageNumber - 1) * pageSize)
+                         .Take(pageSize)
+                         .ToListAsync();
+        }
+
         public async Task<Autor> Obter(Guid id)
         {
             var item = await _bibliotecaContext.Autores?.FirstOrDefaultAsync(p => p.Id == id)!;
