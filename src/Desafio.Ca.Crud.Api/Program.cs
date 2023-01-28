@@ -34,11 +34,15 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SwaggerDefaultValues>();
 });
 
-builder.Services.AddDbContext<BibliotecaContext>();
+builder.Services.AddDbContext<BibliotecaContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("bibliotecaContext"));
+});
 builder.Services.AddMediatR(typeof(AdicionaAutorHandler));
 builder.Services.AddDependeciesInjections();
 
 var app = builder.Build();
+
 using (var serviceScope = app.Services.CreateScope())
 {
     serviceScope.ServiceProvider.GetService<BibliotecaContext>().Database.Migrate();

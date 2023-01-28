@@ -24,7 +24,6 @@ namespace Desafio.Ca.Crud.Infra.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=db;Database=desafio;User Id =sa;Password=Pass@word; MultipleActiveResultSets=true;Persist Security Info=False;Encrypt=False");
         }
 
     }

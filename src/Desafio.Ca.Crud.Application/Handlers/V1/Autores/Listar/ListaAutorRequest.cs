@@ -1,5 +1,4 @@
-﻿using Desafio.Ca.Crud.Application.Handlers.V1.Autores.Buscar;
-using MediatR;
+﻿using MediatR;
 
 namespace Desafio.Ca.Crud.Application.Handlers.V1.Autores.Listar
 {
