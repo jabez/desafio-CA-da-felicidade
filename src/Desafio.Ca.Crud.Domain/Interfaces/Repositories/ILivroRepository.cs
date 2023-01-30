@@ -9,5 +9,6 @@ namespace Desafio.Ca.Crud.Domain.Interfaces.Repositories
         Task RemoverAsync(Livro livro);
         Task<Livro> AtualizarAsync(Livro livro);
         Task<Livro> PatchAsync(Livro livro);
+        Task<List<Autor>> ObterTodosPaginadoAsync(int pageSize, int pageNumber);
     }
 }

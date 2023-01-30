@@ -49,5 +49,13 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Livros
 
             return livro;
         }
+        public async Task<List<Autor>> ObterTodosPaginadoAsync(int pageSize, int pageNumber)
+        {
+            return await _bibliotecaContext.Autores?
+                         .AsNoTracking()
+                         .Skip((pageNumber - 1) * pageSize)
+                         .Take(pageSize)
+                         .ToListAsync();
+        }
     }
 }

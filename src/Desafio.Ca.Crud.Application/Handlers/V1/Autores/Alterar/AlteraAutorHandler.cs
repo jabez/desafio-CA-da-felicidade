@@ -4,10 +4,10 @@ using MediatR;
 
 namespace Desafio.Ca.Crud.Application.Handlers.V1.Autores.Alterar
 {
-    public class AlterarAutorHandler : IRequestHandler<AlteraAutorRequest, RetornoBase<AlteraAutorResponse>>
+    public class AlteraAutorHandler : IRequestHandler<AlteraAutorRequest, RetornoBase<AlteraAutorResponse>>
     {
         private readonly IAutorRepository _autorRepository;
-        public AlterarAutorHandler(IAutorRepository autorRepository) => _autorRepository = autorRepository;
+        public AlteraAutorHandler(IAutorRepository autorRepository) => _autorRepository = autorRepository;
 
 
         public async Task<RetornoBase<AlteraAutorResponse>> Handle(AlteraAutorRequest request, CancellationToken cancellationToken)

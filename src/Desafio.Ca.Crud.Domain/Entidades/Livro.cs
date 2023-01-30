@@ -2,6 +2,19 @@
 {
     public class Livro
     {
+        public Livro(string categoria, string editora, DateTime lancamento, decimal valor, string edicao, string sbn, string titulo)
+        {
+            Id = Guid.NewGuid();
+            Categoria = categoria;
+            Editora = editora;
+            Lancamento = lancamento;
+            Valor = valor;
+            Edicao = edicao;
+            Sbn = sbn;
+            Titulo = titulo;
+            Ativo = true;
+        }
+
         public Guid Id { get; set; }
         public List<Autor> Autores { get; set; }
         public string Categoria { get; set; }
