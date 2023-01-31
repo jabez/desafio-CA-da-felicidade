@@ -16,7 +16,7 @@
         }
 
         public Guid Id { get; set; }
-        public List<Autor> Autores { get; set; }
+        public Autor Autor { get; set; }
         public string Categoria { get; set; }
         public string Editora { get; set; }
         public DateTime Lancamento { get; set; }

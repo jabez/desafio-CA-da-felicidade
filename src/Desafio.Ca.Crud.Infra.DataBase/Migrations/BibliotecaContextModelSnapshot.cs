@@ -22,21 +22,6 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AutorLivro", b =>
-                {
-                    b.Property<Guid>("AutoresId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("LivrosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AutoresId", "LivrosId");
-
-                    b.HasIndex("LivrosId");
-
-                    b.ToTable("LivroAutor", (string)null);
-                });
-
             modelBuilder.Entity("Desafio.Ca.Crud.Domain.Entidades.Autor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -67,6 +52,9 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("AutorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Categoria")
                         .IsRequired()
@@ -102,22 +90,23 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AutorId");
+
                     b.ToTable("Livro", (string)null);
                 });
 
-            modelBuilder.Entity("AutorLivro", b =>
+            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Entidades.Livro", b =>
                 {
-                    b.HasOne("Desafio.Ca.Crud.Domain.Entidades.Autor", null)
-                        .WithMany()
-                        .HasForeignKey("AutoresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Desafio.Ca.Crud.Domain.Entidades.Autor", "Autor")
+                        .WithMany("Livros")
+                        .HasForeignKey("AutorId");
 
-                    b.HasOne("Desafio.Ca.Crud.Domain.Entidades.Livro", null)
-                        .WithMany()
-                        .HasForeignKey("LivrosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Autor");
+                });
+
+            modelBuilder.Entity("Desafio.Ca.Crud.Domain.Entidades.Autor", b =>
+                {
+                    b.Navigation("Livros");
                 });
 #pragma warning restore 612, 618
         }

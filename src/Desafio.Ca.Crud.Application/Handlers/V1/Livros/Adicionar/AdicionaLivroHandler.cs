@@ -20,9 +20,9 @@ namespace Desafio.Ca.Crud.Application.Handlers.V1.Livros.Adicionar
             var livro = new Livro(categoria: request.Categoria, editora: request.Editora, lancamento: request.Lancamento,
                                   valor: request.Valor, edicao: request.Edicao, sbn: request.Sbn, titulo: request.Titulo);
 
-            if (request.Autores != null)
+            if (request.AutorId != null)
             {
-                livro.Autores = await ObterAutores(request.Autores);
+                livro.Autor = await ObterAutor(request.AutorId.Value);
             }
 
             await _livroRepository.AdicionarAsync(livro);
@@ -30,18 +30,13 @@ namespace Desafio.Ca.Crud.Application.Handlers.V1.Livros.Adicionar
             return MontarAdicionaLivroResponse(livro);
         }
 
-        private async Task<List<Autor>> ObterAutores(List<Guid> Ids)
+        private async Task<Autor> ObterAutor(Guid autorId)
         {
-            var retorno = new List<Autor>();
+           var autor = await _autorRepository.Obter(autorId);
+            if (autor != null)
+                return autor;
 
-            foreach (var item in Ids)
-            {
-                var autor = await _autorRepository.Obter(item);
-                if(autor!= null)
-                    retorno.Add(autor);
-            }
-
-            return retorno;
+            return null;
         }
 
         private static AdicionaLivroResponse MontarAdicionaLivroResponse(Livro livro)
@@ -57,12 +52,8 @@ namespace Desafio.Ca.Crud.Application.Handlers.V1.Livros.Adicionar
                 Edicao= livro.Edicao,
                 Sbn = livro.Sbn,
                 Ativo= livro.Ativo,
+                Autor = new AutorDto() { Nome = livro.Autor.Nome } 
             };
-
-            foreach (var item in livro.Autores)
-            {
-                adicionaLivroResponse.Autores.Add(new AutorDto() { Nome = item.Nome });
-            }
 
             return adicionaLivroResponse;
         }

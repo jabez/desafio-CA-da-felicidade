@@ -15,6 +15,6 @@ namespace Desafio.Ca.Crud.Application.Handlers.V1.Livros.Alterar
         public string Edicao { get; set; }
         public string Sbn { get; set; }
         public string Titulo { get; set; }
-        public List<Guid> Autores { get; set; }
+        public Guid? AutorId { get; set; }
     }
 }

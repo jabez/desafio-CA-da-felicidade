@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -29,6 +30,7 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AutorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Categoria = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Editora = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Lancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -41,49 +43,27 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Livro", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LivroAutor",
-                columns: table => new
-                {
-                    AutoresId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LivrosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LivroAutor", x => new { x.AutoresId, x.LivrosId });
                     table.ForeignKey(
-                        name: "FK_LivroAutor_Autor_AutoresId",
-                        column: x => x.AutoresId,
+                        name: "FK_Livro_Autor_AutorId",
+                        column: x => x.AutorId,
                         principalTable: "Autor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LivroAutor_Livro_LivrosId",
-                        column: x => x.LivrosId,
-                        principalTable: "Livro",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LivroAutor_LivrosId",
-                table: "LivroAutor",
-                column: "LivrosId");
+                name: "IX_Livro_AutorId",
+                table: "Livro",
+                column: "AutorId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "LivroAutor");
+                name: "Livro");
 
             migrationBuilder.DropTable(
                 name: "Autor");
-
-            migrationBuilder.DropTable(
-                name: "Livro");
         }
     }
 }

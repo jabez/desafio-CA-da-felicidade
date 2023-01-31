@@ -47,26 +47,22 @@ namespace Desafio.Ca.Crud.Application.Handlers.V1.Livros.Alterar
             livro.Edicao= request.Edicao;
             livro.Sbn = request.Sbn;
             livro.Titulo = request.Titulo;
-
-            if(request.Autores != null && request.Autores.Any())
-            {
-                livro.Autores = await ObterAutores(request.Autores);
-            }
+            livro.Autor = await ObterAutor(request.AutorId);
 
         }
 
-        private async Task<List<Autor>> ObterAutores(List<Guid> Ids)
+        private async Task<Autor> ObterAutor(Guid? autorId)
         {
-            var retorno = new List<Autor>();
-
-            foreach (var item in Ids)
+            if (!autorId.HasValue)
             {
-                var autor = await _autorRepository.Obter(item);
-                if (autor != null)
-                    retorno.Add(autor);
+                return null;
             }
 
-            return retorno;
+            var autor = await _autorRepository.Obter(autorId.Value);
+            if (autor != null)
+                return autor;
+
+            return null;
         }
     }
 }

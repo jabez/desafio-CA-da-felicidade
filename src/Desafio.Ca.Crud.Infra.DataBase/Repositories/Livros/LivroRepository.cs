@@ -52,7 +52,7 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Livros
         public async Task<List<Livro>> ObterTodosPaginadoAsync(int pageSize, int pageNumber)
         {
             return await _bibliotecaContext.Livros?
-                         .Include(x => x.Autores)
+                         .Include(x => x.Autor)
                          .AsNoTracking()
                          .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)

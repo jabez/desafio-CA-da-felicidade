@@ -2,6 +2,8 @@
 using Desafio.Ca.Crud.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Diagnostics;
+using System.Reflection.Emit;
 
 namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
 {
@@ -47,25 +49,8 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
             builder.Property(x => x.Ativo)
                 .IsRequired();
 
-           /* builder.HasMany(x => x.Autores)
-                .WithMany(x => x.Livros)
-                .UsingEntity(j => j.ToTable("LivroAutor"));*/
-            builder.HasMany(x => x.Autores)
-                .WithMany(x => x.Livros)
-                .UsingEntity<Dictionary<string, object>>(
-                "LivroAutor",
-                j => j
-                    .HasOne<Autor>()
-                    .WithMany()
-                    .HasForeignKey("AutoresId")
-                    .HasConstraintName("FK_LivroAutor_Autor_AutorId")
-                    .OnDelete(DeleteBehavior.Cascade),
-                j => j
-                    .HasOne<Livro>()
-                    .WithMany()
-                    .HasForeignKey("LivrosId")
-                    .HasConstraintName("FK_LivroAutor_Livro_LivroId")
-                    .OnDelete(DeleteBehavior.ClientCascade));
+            builder.HasOne(x => x.Autor)
+                .WithMany(x => x.Livros);
         }
     }
 }
