@@ -1,6 +1,7 @@
 ﻿using Desafio.Ca.Crud.Domain.Entidades;
 using Desafio.Ca.Crud.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Autores
 {
@@ -25,7 +26,8 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Autores
 
         public async Task<List<Autor>> ObterTodosPaginadoAsync(int pageSize, int pageNumber)
         {
-            return await _bibliotecaContext.Autores?
+            return await _bibliotecaContext.Autores ?
+                         .Include(x => x.Livros)
                          .AsNoTracking()
                          .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)
@@ -58,6 +60,11 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Repositories.Autores
             await _bibliotecaContext.SaveChangesAsync();
 
             return autor;
+        }
+
+        public async Task<IEnumerable<Autor>> Where(Expression<Func<Autor, bool>> predicate)
+        {
+            return await _bibliotecaContext.Autores.Where(predicate).ToListAsync();
         }
     }
 }

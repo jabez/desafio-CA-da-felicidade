@@ -2,6 +2,6 @@
 {
     public class ExcluiAutorResponse
     {
-
+        public bool Sucesso { get; set; }
     }
 }

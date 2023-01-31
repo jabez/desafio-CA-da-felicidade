@@ -40,7 +40,7 @@ namespace Desafio.Ca.Crud.Api.Controllers.V1.Autores
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateProduct([FromBody] AdicionaAutorRequest adicionarAutorRequest)
+        public async Task<IActionResult> Create([FromBody] AdicionaAutorRequest adicionarAutorRequest)
         {
             var response = await _mediator.Send(adicionarAutorRequest);
             return Created("",response);

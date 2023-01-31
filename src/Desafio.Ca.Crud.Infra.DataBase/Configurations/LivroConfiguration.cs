@@ -1,4 +1,5 @@
-﻿using Desafio.Ca.Crud.Domain.Entidades;
+﻿using Azure;
+using Desafio.Ca.Crud.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -46,9 +47,25 @@ namespace Desafio.Ca.Crud.Infra.DataBase.Configurations
             builder.Property(x => x.Ativo)
                 .IsRequired();
 
+           /* builder.HasMany(x => x.Autores)
+                .WithMany(x => x.Livros)
+                .UsingEntity(j => j.ToTable("LivroAutor"));*/
             builder.HasMany(x => x.Autores)
                 .WithMany(x => x.Livros)
-                .UsingEntity(j => j.ToTable("LivroAutor")); ;
+                .UsingEntity<Dictionary<string, object>>(
+                "LivroAutor",
+                j => j
+                    .HasOne<Autor>()
+                    .WithMany()
+                    .HasForeignKey("AutoresId")
+                    .HasConstraintName("FK_LivroAutor_Autor_AutorId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j
+                    .HasOne<Livro>()
+                    .WithMany()
+                    .HasForeignKey("LivrosId")
+                    .HasConstraintName("FK_LivroAutor_Livro_LivroId")
+                    .OnDelete(DeleteBehavior.ClientCascade));
         }
     }
 }
